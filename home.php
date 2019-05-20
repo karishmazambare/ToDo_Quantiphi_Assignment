@@ -38,6 +38,7 @@ button
    cursor:pointer;
    overflow: hidden;
    outline:none;
+   color: #777777;
 }
 button:hover,input[type=button]:hover
 {
@@ -63,6 +64,7 @@ input[type=button]
   cursor:pointer;
   overflow: hidden;
   outline:none;
+  color: #777777;
 }
 #main
 {
@@ -75,12 +77,33 @@ table
 a
 {
   text-decoration: none;
-  color: black;
   margin-left: 6px;
 }
 a:hover
 {
   color: green;
+  text-decoration: underline;
+}
+.task
+{
+  padding-right: 40px;
+}
+.delete,.update
+{
+  color: #777777; 
+}
+h1
+{
+  background: -webkit-linear-gradient(#2626FF, #FF2626);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+p
+{
+  /*text-shadow: 0 0 0.2em #87F, 0 0 0.2em #87F, 0 0 0.2em #87F;*/
+  background: -webkit-linear-gradient(#2626FF, #FF2626);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>
 </head>
@@ -93,7 +116,7 @@ a:hover
       ?>
         <div id='side'>
 
-            <p> Welcome  <?php echo $_SESSION['name'];?> </p> <br><br>
+            <p> Welcome  <?php echo $_SESSION['name'];?> !</p> <br><br>
             <center>
               <form method="post" action="home.php" class="input_form">
               <input type="text" name="task" class="task_input">
@@ -123,7 +146,7 @@ a:hover
                     }
                     ?>
                     <tr>
-                      <td> <input type="checkbox" name="mark_complete" value="<?php echo $value['id'] ?>" <?php echo $checked; ?>></td>
+                      <td> <input class="checkbox" onclick="strike()" type="checkbox" name="mark_complete" value="<?php echo $value['id'] ?>" <?php echo $checked; ?>></td>
                       <td class="task"> <?php echo $value['task_detail']; ?> </td>
                       <td class="delete"> 
                         <a href="#" class = "delete" data-id = "<?php echo $value['id']?>">delete</a> 
@@ -150,7 +173,24 @@ a:hover
     </div>
 </div>
 <script>
-  if(document.getElementsByClassName("example");)
+  strike();
+  function strike()
+  {
+    var x = document.getElementsByClassName("checkbox");
+    var y = document.getElementsByClassName("task");
+    for(i=0;i<x.length;i++)
+    {
+      if(x[i].checked==true)
+      {
+        y[i].style.textDecoration="line-through";
+      }
+      if(x[i].checked==false)
+      {
+        y[i].style.textDecoration="none";
+      }
+    }
+  }
+
 </script>
 </body>
 </html>
